@@ -3,6 +3,8 @@ import NavBar from "./components/NavBar";
 import styles from './App.module.css';
 import { Container } from 'react-bootstrap';
 import {Route, Switch} from 'react-router-dom';
+import './api/axiosDefault';
+import Registration from './pages/auth/RegistrationForm';
 
 function App() {
   return (
@@ -12,7 +14,7 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => <h1>Home</h1>} />
           <Route exact path="/signin" render={() => <h1>Sign In</h1>} />
-          <Route exact path="/register" render={() => <h1>Register</h1>} />
+          <Route exact path="/register" render={() => <Registration />} />
           <Route render={() => <h1>404 Not Found</h1>} />
         </Switch>
       </Container>
