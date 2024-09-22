@@ -3,6 +3,10 @@
     background-color: #f8f8f8;
     min-height: 100vh;
 }
+
+.Main {
+    padding-top: 81px;
+}
   
   * {
     box-sizing: border-box;
@@ -15,6 +19,7 @@
   
   a:hover {
     text-decoration: none;
+    color: #2be6ae;
   }
   
   a:hover i {
@@ -32,5 +37,5 @@
   i:hover {
     cursor: pointer;
     transition: color ease-in-out 0.3s;
-    color: #2142b2;
+    color: #2be6ae;
   }

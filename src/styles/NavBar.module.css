@@ -1,3 +1,16 @@
 .NavBar {
     padding: 5px;
+    border: 1px solid #2be6ae;
+}
+
+.NavLink {
+    transition: color ease-in-out 0.3s;
+}
+
+.Active i {
+    color: #2be6ae;
+}
+
+.Active a {
+    color: #2be6ae;
 }
