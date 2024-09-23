@@ -5,15 +5,19 @@ import { Container } from 'react-bootstrap';
 import {Route, Switch} from 'react-router-dom';
 import './api/axiosDefault';
 import Registration from './pages/auth/RegistrationForm';
+import SignInForm from './pages/auth/SignInForm';
+import { useState } from 'react';
 
 function App() {
+  //const [currentUser, setCurrentUser] = useState(null);
+
   return (
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <h1>Home</h1>} />
-          <Route exact path="/signin" render={() => <h1>Sign In</h1>} />
+          <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/register" render={() => <Registration />} />
           <Route render={() => <h1>404 Not Found</h1>} />
         </Switch>
