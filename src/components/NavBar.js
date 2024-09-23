@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from '../styles/NavBar.module.css';
 import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { CurrentUserContext } from "../App";
 
 const NavBar = () => {
+    const currentUser = useContext(CurrentUserContext)
+    const loggedInIcons = <>{currentUser?.username}</>
+    const loggedOutIcons = (
+        <>
+            <Nav.Link as={NavLink} className={styles.NavLink} activeClassName={styles.Active} to="/signin"><i className="fas fa-sign-in-alt"></i>Sign In</Nav.Link>
+            <Nav.Link as={NavLink} className={styles.NavLink} activeClassName={styles.Active} to="/register"><i className="fas fa-user-plus"></i>Register</Nav.Link>
+        </>
+    );
+
     return (
         <Container>
             <div>
@@ -13,8 +23,7 @@ const NavBar = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link as={NavLink} className={styles.NavLink} activeClassName={styles.Active} to="/"><i className="fas fa-home"></i>Home</Nav.Link>
-                            <Nav.Link as={NavLink} className={styles.NavLink} activeClassName={styles.Active} to="/signin"><i className="fas fa-sign-in-alt"></i>Sign In</Nav.Link>
-                            <Nav.Link as={NavLink} className={styles.NavLink} activeClassName={styles.Active} to="/register"><i className="fas fa-user-plus"></i>Register</Nav.Link>
+                            {currentUser ? loggedInIcons : loggedOutIcons}
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

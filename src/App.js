@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import NavBar from "./components/NavBar";
 import styles from './App.module.css';
 import { Container } from 'react-bootstrap';
