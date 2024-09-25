@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -6,15 +6,17 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
+import Image from "react-bootstrap/Image";
+
+import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+
+import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefault";
 
 function PostCreateForm() {
@@ -56,10 +58,10 @@ function PostCreateForm() {
     formData.append("image", imageInput.current.files[0]);
 
     try {
-      const { data } = await axiosReq.post("https://kinnect-api-cf0f665319fa.herokuapp.com/posts/", formData);
+      const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -77,6 +79,12 @@ function PostCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -87,10 +95,15 @@ function PostCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
         cancel
       </Button>
@@ -114,22 +127,39 @@ function PostCreateForm() {
                     <Image className={appStyles.Image} src={image} rounded />
                   </figure>
                   <div>
-                    <Form.Label className={`${btnStyles.Button} ${btnStyles.Blue}`} htmlFor="image-upload">
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      htmlFor="image-upload"
+                    >
                       Change the image
                     </Form.Label>
                   </div>
                 </>
-                ) : (
-              
+              ) : (
                 <Form.Label
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
                 >
-                  <Asset src={Upload} message="Upload an image" />
+                  <Asset
+                    src={Upload}
+                    message="Click or tap to upload an image"
+                  />
                 </Form.Label>
               )}
-                <Form.File id="image-upload" accept="image/*" onChange={handleChangeImage} ref={imageInput} />
+
+              <Form.File
+                id="image-upload"
+                accept="image/*"
+                onChange={handleChangeImage}
+                ref={imageInput}
+              />
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
