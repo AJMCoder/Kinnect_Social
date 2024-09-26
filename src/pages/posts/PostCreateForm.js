@@ -61,7 +61,7 @@ function PostCreateForm() {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -152,6 +152,7 @@ function PostCreateForm() {
                 accept="image/*"
                 onChange={handleChangeImage}
                 ref={imageInput}
+                type="file"
               />
             </Form.Group>
             {errors?.image?.map((message, idx) => (
