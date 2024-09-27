@@ -7,11 +7,14 @@ import Registration from './pages/auth/RegistrationForm';
 import SignInForm from './pages/auth/SignInForm';
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
-
-
+import PostsPage from "./pages/posts/PostsPage";
+import { useCurrentUser } from "./contexts/CurrentUserContext";
 
 
 function App() {
+
+  const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
   
 
   return (
@@ -20,7 +23,9 @@ function App() {
           <NavBar />
           <Container className={styles.Main}>
             <Switch>
-              <Route exact path="/" render={() => <h1>Home</h1>} />
+              <Route exact path="/" render={() => <PostsPage message="No results could be found. Adjust the search parameters." />} />
+              <Route exact path="/feed" render={() => <PostsPage message="No results could be found. Adjust the search parameters or follow an account." filter={`owner__followed__owner__profile=${profile_id}&`} />} />
+              <Route exact path="/liked" render={() => <PostsPage message="No results could be found. Adjust the search parameters or like a post." filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />
               <Route exact path="/signin" render={() => <SignInForm />} />
               <Route exact path="/register" render={() => <Registration />} />
               <Route exact path="/posts/create" render={() => <PostCreateForm />} />
