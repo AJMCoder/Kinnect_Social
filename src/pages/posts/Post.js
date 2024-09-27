@@ -5,14 +5,30 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import Avatar from "../../components/Avatar";
 import { Card, Media, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefault';
+import { MoreDropdown } from '../../components/MoreDropdown';
+import { useHistory } from 'react-router-dom';
 
 const Post = (props) => {
   const {
-    id, owner, profile_id, profile_image, comments_count, likes_count, like_id, title, content, image, updated_at, postPage, setPosts
+    id, owner, profile_id, profile_image, comments_count, likes_count, like_id, title, content, image, formatted_created_at, postPage, setPosts
   } = props;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/posts/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/posts/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleLike = async () => {
     try {
@@ -55,8 +71,13 @@ const Post = (props) => {
             {owner}
           </Link>
           <div className="d-flex align-items-center">
-            <span>{updated_at}</span>
-            {is_owner && postPage && "..."}
+            <span>{formatted_created_at}</span> {/* Uses the formatted date */}
+            {is_owner && postPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>
@@ -90,11 +111,11 @@ const Post = (props) => {
               <i className="far fa-heart" />
             </OverlayTrigger>
           )}
-          <span>{likes_count}</span>
+          {likes_count}
           <Link to={`/posts/${id}`}>
             <i className="far fa-comments" />
           </Link>
-          <span>{comments_count}</span>
+          {comments_count}
         </div>
       </Card.Body>
     </Card>
