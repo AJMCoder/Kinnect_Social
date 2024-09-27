@@ -31,14 +31,16 @@ const Registration = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      await axios.post("https://kinnect-api-cf0f665319fa.herokuapp.com/dj-rest-auth/registration/", signUpData)
-      history.push("/signin")
-    } catch(err) {
+      await axios.post("https://kinnect-api-cf0f665319fa.herokuapp.com/dj-rest-auth/registration/", signUpData);
+      history.push("/signin");  // Redirect to signin after successful registration
+    } catch (err) {
       console.error("Error response:", err.response?.data);
-      setError(err.response?.data)
+      setError(err.response?.data);  // Set error to display messages on the form
     }
   };
+  
 
   return (
     <Row className={styles.Row}>
