@@ -15,7 +15,7 @@ import { fetchMoreData } from "../../utils/utils";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
 import NoResults from "../../assets/no-results.png";
-import PopularProfiles from "../../profiles/PopularProfiles";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 function PostsPage({ message, filter = "" }) {
     const [posts, setPosts] = useState({ results: [] });
