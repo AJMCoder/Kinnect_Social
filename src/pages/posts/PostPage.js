@@ -10,6 +10,9 @@ import { axiosReq } from "../../api/axiosDefault";
 import appStyles from "../../App.module.css";
 import Post from "./Post";
 import Comment from "../comments/Comment";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
+import Asset from "../../components/Asset";
 
 import CommentCreateForm from "../comments/CommentCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -36,7 +39,6 @@ function PostPage() {
         console.log(err);
       }
     };
-
     handleMount();
   }, [id]);
 
@@ -58,13 +60,24 @@ function PostPage() {
             "Comments"
           ) : null}
           {comments.results.length ? (
-            comments.results.map(comment => (
-              <Comment key={comment.id} {...comment} setPost={setPost} setComments={setComments} />
-            ))
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setPost={setPost}
+                  setComments={setComments}
+                />
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
           ) : currentUser ? (
-            <span>Be the first to comment</span>
+            <span>No comments yet, be the first to comment!</span>
           ) : (
-            <span>No comments yet</span>
+            <span>No comments... yet</span>
           )}
         </Container>
       </Col>
