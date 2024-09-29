@@ -1,82 +1,138 @@
-import React from "react";
-import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Navbar, Nav, Container, Dropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import axios from "axios";
 import styles from "../styles/NavBar.module.css";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import { axiosRes } from "../api/axiosDefault";  // Axios for API requests
 
 const NavBar = () => {
-    const currentUser = useCurrentUser();
-    const setCurrentUser = useSetCurrentUser();
+  const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
 
-    const { expanded, setExpanded, ref } = useClickOutsideToggle();
+  const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
-    const handleSignOut = async () => {
-        try {
-            await axios.post("https://kinnect-api-cf0f665319fa.herokuapp.com/dj-rest-auth/logout/");
-            setCurrentUser(null);
-        } catch (err) {
-            console.log(err);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    if (currentUser) {
+      axiosRes.get("/notifications/")
+      .then((response) => {
+        console.log(response.data);  // Log to verify the response
+        const notifications = response.data.results;  // Access 'results' for the notifications array
+        setNotifications(notifications);
+
+        // Safeguard to check if 'results' is an array
+        if (Array.isArray(notifications)) {
+          const unread = notifications.filter(notification => !notification.is_read).length;
+          setUnreadCount(unread);  // Set unread notifications count
+        } else {
+          console.error("Unexpected response format:", response.data);
         }
-    };
+      })
+      .catch((err) => {
+        console.error("Error fetching notifications:", err);
+      });
+  }
+}, [currentUser]);
 
-    const addPostIcon = (
-        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/posts/create">
-            <i className="fas fa-plus"></i>Add Post
-        </NavLink>
-    );
+  const handleSignOut = async () => {
+    try {
+      await axios.post("https://kinnect-api-cf0f665319fa.herokuapp.com/dj-rest-auth/logout/");
+      setCurrentUser(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    const loggedInIcons = (
-        <>
-            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/feed">
-                <i className="fas fa-stream"></i>Feed
-            </NavLink>
-            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/liked">
-                <i className="fas fa-heart"></i>Liked
-            </NavLink>
-            <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
-                <i className="fas fa-sign-out-alt"></i>Sign Out
-            </NavLink>
-            <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}>
-                <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
-            </NavLink>
-        </>
-    );
+  const markAsRead = (id) => {
+    axiosRes.patch(`/notifications/${id}/`, { is_read: true })
+      .then(() => {
+        setNotifications(prevNotifications =>
+          prevNotifications.map(notification =>
+            notification.id === id ? { ...notification, is_read: true } : notification
+          )
+        );
+        setUnreadCount(prev => prev - 1);
+      })
+      .catch(err => console.error("Error marking notification as read:", err));
+  };
 
-    const loggedOutIcons = (
-        <>
-            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signin">
-                <i className="fas fa-sign-in-alt"></i>Sign In
-            </NavLink>
-            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/register">
-                <i className="fas fa-user-plus"></i>Register
-            </NavLink>
-        </>
-    );
+  const addPostIcon = (
+    <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/posts/create">
+      <i className="fas fa-plus"></i>Add Post
+    </NavLink>
+  );
 
-    return (
-        <Container>
-            <Navbar expanded={expanded} className={styles.NavBar} bg="dark" expand="md" fixed="top" variant="dark">
-                <Navbar.Brand as={NavLink} to="/">Navbar</Navbar.Brand>
-                {currentUser && addPostIcon}
-                <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/">
-                            <i className="fas fa-home"></i>Home
-                        </NavLink>
-                        {currentUser ? loggedInIcons : loggedOutIcons}
-                    </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-info">Search</Button>
-                    </Form>
-                </Navbar.Collapse>
-            </Navbar>
-        </Container>
-    );
+  const loggedInIcons = (
+    <>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/feed">
+        <i className="fas fa-stream"></i>Feed
+      </NavLink>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/liked">
+        <i className="fas fa-heart"></i>Liked
+      </NavLink>
+
+      {/* Notifications Dropdown */}
+      <Dropdown alignRight>
+        <Dropdown.Toggle className={`${styles.NavLink} ${styles.NotificationIcon}`} variant="light" id="dropdown-basic">
+          <i className="fas fa-bell"></i>
+          {unreadCount > 0 && <span className={styles.UnreadBadge}>{unreadCount}</span>}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {notifications.length > 0 ? (
+            notifications.map(notification => (
+              <Dropdown.Item key={notification.id} onClick={() => markAsRead(notification.id)}>
+                {notification.sender_username} {notification.notification_type} your post
+              </Dropdown.Item>
+            ))
+          ) : (
+            <Dropdown.Item>No notifications</Dropdown.Item>
+          )}
+        </Dropdown.Menu>
+      </Dropdown>
+
+      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
+        <i className="fas fa-sign-out-alt"></i>Sign Out
+      </NavLink>
+      <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}>
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+      </NavLink>
+    </>
+  );
+
+  const loggedOutIcons = (
+    <>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signin">
+        <i className="fas fa-sign-in-alt"></i>Sign In
+      </NavLink>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/register">
+        <i className="fas fa-user-plus"></i>Register
+      </NavLink>
+    </>
+  );
+
+  return (
+    <Container>
+      <Navbar expanded={expanded} className={styles.NavBar} bg="dark" expand="md" fixed="top" variant="dark">
+        <Navbar.Brand as={NavLink} to="/">Navbar</Navbar.Brand>
+        {currentUser && addPostIcon}
+        <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <NavLink exact className={styles.NavLink} activeClassName={styles.Active} to="/">
+              <i className="fas fa-home"></i>Home
+            </NavLink>
+            {currentUser ? loggedInIcons : loggedOutIcons}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </Container>
+  );
 };
 
 export default NavBar;

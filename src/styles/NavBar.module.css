@@ -5,12 +5,33 @@
 
 .NavLink {
     transition: color ease-in-out 0.3s;
+    padding: 5px;
+    color: #555555; /* Matches global link color */
+    text-decoration: none;
 }
 
-.Active i {
-    color: #2be6ae;
+.NavLink:hover,
+.NavLink:focus {
+    color: #2be6ae; /* Matches global hover color */
 }
 
-.Active a {
-    color: #2be6ae;
+.NotificationIcon {
+    color: #cfced3; /* Matches the default icon color from global styles */
+    position: relative;
+    padding: 5px;
+}
+
+.NotificationIcon:hover {
+    color: #2be6ae; /* Hover color consistent with global styling */
+}
+
+.UnreadBadge {
+    background-color: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
 }
