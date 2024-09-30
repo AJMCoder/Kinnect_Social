@@ -2,15 +2,15 @@
 
 This is the Frontend for Kinnect built with React Bootstrap.
 
-![Screenshot showing responsiveness of home page](`not yet added`)
+![Screenshot showing responsiveness of home page](src/assets/readme/responsiveness.png)
 
 Kinnect is a place where people alike can come together to share their love of gaming. Users can share their experiences, like and write comments, follow other users and rate user profiles. User have full customisation of their profile, have space to write about themselves and what they enjoy and add a profile picture.
 
 This is the Frontend of the application, built in React.
 
-- The deployed version of the API is [HERE](`yet to add`).
-- The deployed version of the full site built in React is [HERE](`yet to add`).
-- The frontend repository is [HERE](`yet to add`).
+- The deployed version of the API is [HERE](https://kinnect-api-cf0f665319fa.herokuapp.com/).
+- The deployed version of the full site built in React is [HERE](https://kinnectsocial-98b2a3f8410d.herokuapp.com/).
+- The frontend repository is [HERE](https://github.com/AJMCoder/kinnect_social).
 
 ## Wireframes
 
@@ -18,12 +18,14 @@ This is the Frontend of the application, built in React.
 
 ## User Stories
 
+Here is a link to the [User Stories](https://github.com/users/AJMCoder/projects/3).
+
 ### Admin
 
 **User Stories:**
 - As a **site admin** I can **add, edit, and delete profiles from the database** so that **users are safe from spammers or account hackers**
 - As a **site admin** I can **remove posts or comments if they are not appropriate or relevant** so that **the site is enjoyable and safe for all users**
-- As a **site admin** I can **see lists of all user profiles, posts, likes, and comments, followers and ratings** so that **I have an overview of all activity on the site**
+- As a **site admin** I can **see lists of all user profiles, posts, likes, and comments, followers** so that **I have an overview of all activity on the site**
 
 ### Profile Management
 
@@ -41,12 +43,10 @@ This is the Frontend of the application, built in React.
 - As a **user** I can **delete my posts** so that **I can remove posts made in error, or that I don't want displayed on my profile anymore**
 - As a **user** I can **like and unlike other users' posts** so that **I can engage with content that I enjoy**
 
-### Ratings Management
+### Notifications System
 
 **User Stories:**
-- As a **user** I can **rate other users on their profiles** so that **express how i feel they are performing or quality of content**
-- As a **user** I can **view ratings of users profiles** so that **I can see how others are viewing them**
-- As a **user** I can **update my rating** so that **it it relevant depending on their recent posts and shares**
+- As a **user** I can **see if a user has liked or commented on my posts** so that **I can see how others are interacting with them**
 
 ## Features
 
@@ -54,43 +54,43 @@ This is the Frontend of the application, built in React.
 
 - **Navigation Bar**
     - The navigation bar appears across all pages of the application, and changes depending whether the user is logged in or not.
-    ![Navbar]()
+    ![Navbar](src/assets/readme/features/navbar.png)
 
 - **Sign In Page**
     - The sign in page allows an existing user to sign in to the site. There is a prompt redirecting the user to the sign up page if they don't already have an account. The layout for the sign in and sign up pages are both the same for visual / stylistic consistency.
-    ![Sign in page]()
+    ![Sign in page](src/assets/readme/features/signin.png)
 
 - **Registration Page**
     - The registration page allows a user to create a new account. There is a prompt redirecting the user to the sign in page if they already have an account.
-    ![Registration page]()
+    ![Registration page](src/assets/readme/features/register.png)
 
 - **Home Page**
     - When the user is logged in, they are directed to the home page, where they can view: Posts from users they follow, users that they can follow, likes and comments, a link to their own profile and the navigation bar across to top.
-    ![Home page]()
+    ![Home page](src/assets/readme/features/home.png)
 
-- **Rating**
-    - The rating feature starts every new account at 5. When users view a profile, they have the option to rate it. This rating can represent how they view the persons profile in general or maybe the posts the user has published. It is a scale from 1 - 5 in scale.
-    ![Rating]()
+- **Notifications**
+    - The notifications feature allows user to actively see who is interacting with their posts. Users will be notified if another user likes, or comments on any post they have made!
+    ![Notifications](src/assets/readme/features/notification.png)
 
 - **Post**
     - A user can post anything gaming related or acheivement related within a game so that user that follow them can view it and interact with it. Users can like or comment on the post.
-    ![Post]()
+    ![Post](src/assets/readme/features/posts.png)
 
 - **Comment**
     - A user can leave a comment on a post. There is a form beneath each post with a free text box. Comments are displayed with the user's profile photo, a link to their profile, and a time stamp showing the date & time the comment was left.
-    ![Comment]()
+    ![Comment](src/assets/readme/features/comments.png)
 
 - **Like**
     - Users have the option to like and post that appears in their feed. When a user likes a post, they can see this as the heart icon, symbolising a like, changes colour.
-    [Like]()
+    [Likes](src/assets/readme/features/liked.png)
 
 - **Follow**
     - Users have the ability to follow other users so that their feed can contain the posts from said users for them to view.
-    [Follow]()
+    [Follow](src/assets/readme/features/follow.png)
 
 - **Profile Page**
     - The profile page allows a user to view their own or another user's profile. Users can edit their own profile by adding an image and a bio. The page also displays the number posts and rating that a user has, and shows a feed of their posts below their bio.
-    ![Profile page]()
+    ![Profile page](src/assets/readme/features/profile.png)
 
 ## Future Features
 
@@ -99,6 +99,7 @@ Some features that would benefit the site and its usability would be:
 - The ability to publish videos.
 - The ability to join small groups maybe for specific gaming communities to join and chat together.
 - The ability to have games liked listed in a users profile with images of said games.
+- A ratings system, so that users can let other people know how they're liking their posts in a different and interactive way.
 
 ## Testing
 
@@ -112,8 +113,12 @@ Please see my [testing file](Testing.md) for all manual and validator testing.
 
 - When running tests for the Post list, i discovered an error "ERROR: test_can_list_posts (posts.tests.PostListViewTests.test_can_list_posts)". Reading through the error message allowed me to rectify the issue and traceback to the Post.views file where the error persists because the request context was not being passed to the serializer in the PostListView.
 - When going back through my work, i was testing the links for 'profiles', and 'posts' before moving forward into 'comments'. I discovered that the '/posts' address was throwing out and operational error for the post.image_filter that had been added. Saving the file and reloading the page, the error persisted. I then realised that it was added after the initial migration of the posts app and so i did 'python manage.py makemigrations' and then 'python manage.py migrate' and reloaded the website and saw that it had fixed the issue.
+- I had a major issue where i was receiving constant 500 internal error codes. Having spent hours changing backend configuration, testing autherization, serializers and allowed hosts, it appeared to have been a fault with the cloudinary URL link.
+- There was an issue where users were losing their access due to token refreshing. I went into the JWT settings and changed some of the values and set a timer.
 
 ## Unfixed Bugs
+
+- No current console issues.
 
 
 ### Local Deployment
@@ -172,6 +177,6 @@ Before your final deployment, complete the following steps:
 
 ### Media
 
-- I used [pexels]() for all of my images.
-- I used [font awesome]() for the majority of my icons used
-- I used [Google fonts]() for some of the icons required in the project.
+- I used [pexels](https://www.pexels.com/) for all of my images.
+- I used [font awesome](https://fontawesome.com/) for the majority of my icons used
+- I used [Google fonts](https://fonts.google.com/) for some of the icons required in the project.
