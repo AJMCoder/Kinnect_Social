@@ -1,37 +1,40 @@
 .NavBar {
     padding: 5px;
-    border-bottom: 1px solid #2be6ae;
+    border-bottom: 3px solid #2be6ae; /* Neon green border */
+    background-color: #1a1a1a; /* Dark background for a retro look */
 }
 
 .NavLink {
     transition: color ease-in-out 0.3s;
-    padding: 5px;
-    color: #555555; /* Matches global link color */
+    padding: 10px; /* Slightly more padding for a blocky feel */
+    color: #00eaff; /* Neon blue for links */
     text-decoration: none;
+    font-weight: bold; /* Bolder text for a more impactful retro look */
 }
 
 .NavLink:hover,
 .NavLink:focus {
-    color: #2be6ae; /* Matches global hover color */
+    color: #ff5f5f; /* Bright red hover effect to match retro style */
 }
 
 .NotificationIcon {
-    color: #cfced3; /* Matches the default icon color from global styles */
+    color: #00eaff; /* Neon blue for the notification bell */
     position: relative;
     padding: 5px;
 }
 
 .NotificationIcon:hover {
-    color: #2be6ae; /* Hover color consistent with global styling */
+    color: #2be6ae; /* Neon green hover effect */
 }
 
 .UnreadBadge {
-    background-color: red;
+    background-color: #ff5f5f; /* Bright red for the unread notification count */
     color: white;
     padding: 2px 5px;
-    border-radius: 50%;
+    border-radius: 50%; /* Keep circular shape for notification badge */
     font-size: 12px;
     position: absolute;
     top: -5px;
     right: -5px;
 }
+

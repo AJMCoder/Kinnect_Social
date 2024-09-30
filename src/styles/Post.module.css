@@ -1,24 +1,26 @@
 .Post {
-    background-color: #ffffff;
-    border: 1px solid #dadadf;
-    border-radius: 2px;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .Post figure,
-  h5 {
-    margin: 0 0;
-  }
-  
-  .Heart {
-    color: #f85032;
-  }
-  
-  .Heart:hover {
-    color: #2142b2;
-  }
-  
-  .HeartOutline:hover {
-    color: #f85032;
-  }
+  background-color: #1a1a1a; /* Dark background for a retro block look */
+  border: 3px solid #2be6ae; /* Neon green Tetris-like border */
+  border-radius: 4px; /* Slightly blockier edges */
+  margin-bottom: 16px;
+  text-align: center;
+  box-shadow: 0px 0px 8px 2px rgba(43, 230, 174, 0.4); /* Soft glow effect */
+}
+
+.Post figure,
+h5 {
+  margin: 0 0;
+  color: #ffffff; /* White text for contrast */
+}
+
+.Heart {
+  color: #f85032; /* Classic Tetris red */
+}
+
+.Heart:hover {
+  color: #00eaff; /* Neon blue hover effect */
+}
+
+.HeartOutline:hover {
+  color: #f85032; /* Hover effect matches Tetris red */
+}

@@ -1,20 +1,23 @@
 .App {
-    font-family: 'sofadi one', sans-serif, system-ui;
-    background-color: #f8f8f8;
-    min-height: 100vh;
+  font-family: 'sofadi one', sans-serif, system-ui;
+  background-color: #0d0d0d; /* Darker background, like a Tetris grid */
+  min-height: 100vh;
+  color: #ffffff; /* Make default text color white for contrast */
 }
 
 .Main {
-    padding-top: 81px;
+  padding-top: 81px;
 }
 
 .Content {
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 2px;
-  border: 1px solid #dadadf;
+  background-color: #1a1a1a; /* Dark block background */
+  padding: 20px;
+  border-radius: 4px; /* Slightly sharper edges for a blocky look */
+  border: 3px solid #2be6ae; /* Tetris-like neon border color */
+  box-shadow: 0px 0px 10px 2px rgba(43, 230, 174, 0.5); /* Neon shadow */
 }
 
+/* For images or blocks to maintain Tetris grid-like style */
 .FillerImage {
   object-fit: cover;
   height: 100%;
@@ -26,58 +29,63 @@
   max-width: 100%;
   object-fit: contain;
 }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  a {
-    color: #555555;
-    transition: color ease-in-out 0.3s;
-  }
-  
-  a:hover {
-    text-decoration: none;
-    color: #2be6ae;
-  }
-  
-  a:hover i {
-    color: #2be6ae;
-    transition: color ease-in-out 0.3s;
-  }
 
-  input[type="file"] {
-    display: none;
-  }
-  
-  i {
-    color: #cfced3;
-    font-size: 1.6rem;
-    padding: 7px;
-    vertical-align: middle;
-  }
-  
-  i:hover {
-    cursor: pointer;
-    transition: color ease-in-out 0.3s;
-    color: #2be6ae;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  figure {
-    text-align: center;
-    display: inline-block;
-  }
-  
-  /* scrollbar */
-  *::-webkit-scrollbar {
-    width: 5px;
-  }
-  *::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  *::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  *::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+/* Links and Icons with vibrant Tetris-like colors */
+a {
+  color: #00eaff; /* Light neon blue like Tetris piece */
+  transition: color ease-in-out 0.3s;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #ff5f5f; /* Red for hover, like another Tetris block */
+}
+
+a:hover i {
+  color: #ff5f5f; /* Icon color change on hover */
+  transition: color ease-in-out 0.3s;
+}
+
+/* Input styling for forms, keeping it simple */
+input[type="file"] {
+  display: none;
+}
+
+i {
+  color: #00eaff; /* Default icon color to match Tetris theme */
+  font-size: 1.6rem;
+  padding: 7px;
+  vertical-align: middle;
+}
+
+i:hover {
+  cursor: pointer;
+  color: #ff5f5f; /* Red on hover */
+  transition: color ease-in-out 0.3s;
+}
+
+figure {
+  text-align: center;
+  display: inline-block;
+}
+
+/* Scrollbar styling with retro colors */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #333333; /* Darker background for the track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #2be6ae; /* Bright neon green scrollbar */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #00eaff; /* Change color on hover for retro effect */
+}

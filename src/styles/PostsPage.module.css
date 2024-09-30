@@ -1,18 +1,22 @@
 .SearchBar input {
-    border-radius: 20px;
-    color: #242a3d;
-    padding-left: 40px;
-    margin-bottom: 16px;
-  }
-  
-  .SearchIcon {
-    position: absolute;
-    font-size: 1.2rem;
-    padding: 9px;
-    padding-left: 15px;
-  }
-  
-  .SearchIcon:hover {
-    cursor: default;
-    color: #cfced3;
-  }
+  border-radius: 10px; /* Blockier radius for retro effect */
+  color: #ffffff; /* White text */
+  background-color: #0d0d0d; /* Dark background for search bar */
+  padding-left: 40px;
+  margin-bottom: 16px;
+  border: 3px solid #2be6ae; /* Neon green border */
+  box-shadow: 0px 0px 6px 2px rgba(43, 230, 174, 0.3); /* Subtle neon glow */
+}
+
+.SearchIcon {
+  position: absolute;
+  font-size: 1.2rem;
+  padding: 9px;
+  padding-left: 15px;
+  color: #00eaff; /* Neon blue for the search icon */
+}
+
+.SearchIcon:hover {
+  cursor: default;
+  color: #ff5f5f; /* Red hover effect for retro feel */
+}

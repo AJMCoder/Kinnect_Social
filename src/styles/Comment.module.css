@@ -1,10 +1,11 @@
 .Owner {
-    font-weight: bold;
-    color: #2142b2;
-    margin-right: 8px;
-  }
-  
-  .Date {
-    font-weight: lighter;
-    color: #c1c1c5;
-  }
+  font-weight: bold;
+  color: #00eaff; /* Neon blue for the owner's name */
+  margin-right: 8px;
+}
+
+.Date {
+  font-weight: lighter;
+  color: #c1c1c5; /* Keeping a subtle light gray for the date */
+  font-style: italic; /* Adding a slight retro touch with italics */
+}

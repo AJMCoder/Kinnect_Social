@@ -7,7 +7,7 @@
 
 @media screen and (max-width: 991px) {
     .ProfileImage {
-        height: 250px;
-        width: 25px;
+        height: 100px; /* Set height and width to the same value */
+        width: 100px;  /* Maintain the aspect ratio */
     }
 }

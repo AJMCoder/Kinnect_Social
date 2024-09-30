@@ -1,46 +1,52 @@
 .Row {
-    height: calc(100vh - 81px);
-  }
-  .Input {
-    background: #ffffff;
-    border: 1px solid #f0f1f9;
-    box-sizing: border-box;
-    border-radius: 2px;
-    color: #7177a1;
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .Header {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #2142b2;
-  }
-  
-  .Link {
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    margin: auto;
-  }
-  
-  .Link span {
-    color: #ff9254;
-  }
-  
-  .Container {
-    padding: 30px 10px;
-  }
-  
-  .SignInCol {
-    height: 320px;
-  }
-  
-  .SignUpCol {
-    height: 375px;
-  }
+  height: calc(100vh - 81px);
+}
+
+.Input {
+  background: #1a1a1a; /* Dark background for input fields */
+  border: 3px solid #2be6ae; /* Neon green Tetris border */
+  box-sizing: border-box;
+  border-radius: 4px; /* Slightly blockier edges */
+  color: #ffffff; /* White text for contrast */
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0px 0px 6px 2px rgba(43, 230, 174, 0.4); /* Subtle glow effect */
+}
+
+.Header {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px; /* Slightly larger font for a more impactful header */
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00eaff; /* Neon blue for the header */
+}
+
+.Link {
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  margin: auto;
+  color: #00eaff; /* Neon blue for the link */
+}
+
+.Link span {
+  color: #ff5f5f; /* Bright red for highlighted text in links */
+}
+
+.Container {
+  padding: 30px 10px;
+  background-color: #0d0d0d; /* Dark background for container */
+  border-radius: 8px; /* Blocky, retro styling */
+  box-shadow: 0px 0px 10px 2px rgba(0, 234, 255, 0.3); /* Subtle neon blue glow around the container */
+}
+
+.SignInCol {
+  height: 320px;
+}
+
+.SignUpCol {
+  height: 375px;
+}
