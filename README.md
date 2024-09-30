@@ -14,7 +14,11 @@ This is the Frontend of the application, built in React.
 
 ## Wireframes
 
-`TBA`
+In the planning stage of this project, I created basic wireframes for desktop and mobile versions of the main pages of the site, outlining the basic structure for the site and where i would like features to be and placement of the core elements of the social site.
+
+[Desktop Wireframe](src/assets/readme/Wireframe-desktop.png)
+
+[Mobile Wireframe](src/assets/readme/wireframe-mobile.png)
 
 ## User Stories
 
@@ -58,11 +62,12 @@ Here is a link to the [User Stories](https://github.com/users/AJMCoder/projects/
 
 - **Sign In Page**
     - The sign in page allows an existing user to sign in to the site. There is a prompt redirecting the user to the sign up page if they don't already have an account. The layout for the sign in and sign up pages are both the same for visual / stylistic consistency.
-    ![Sign in page](src/assets/readme/features/signin.png)
+
+        ![Sign in page](src/assets/readme/features/signin.png)
 
 - **Registration Page**
     - The registration page allows a user to create a new account. There is a prompt redirecting the user to the sign in page if they already have an account.
-    ![Registration page](src/assets/readme/features/register.png)
+    ![Registration page](src/assets/readme/features/registration.png)
 
 - **Home Page**
     - When the user is logged in, they are directed to the home page, where they can view: Posts from users they follow, users that they can follow, likes and comments, a link to their own profile and the navigation bar across to top.
@@ -70,7 +75,8 @@ Here is a link to the [User Stories](https://github.com/users/AJMCoder/projects/
 
 - **Notifications**
     - The notifications feature allows user to actively see who is interacting with their posts. Users will be notified if another user likes, or comments on any post they have made!
-    ![Notifications](src/assets/readme/features/notification.png)
+
+        ![Notifications](src/assets/readme/features/notification.png)
 
 - **Post**
     - A user can post anything gaming related or acheivement related within a game so that user that follow them can view it and interact with it. Users can like or comment on the post.
@@ -82,15 +88,17 @@ Here is a link to the [User Stories](https://github.com/users/AJMCoder/projects/
 
 - **Like**
     - Users have the option to like and post that appears in their feed. When a user likes a post, they can see this as the heart icon, symbolising a like, changes colour.
-    [Likes](src/assets/readme/features/liked.png)
+    ![Likes](src/assets/readme/features/liked.png)
 
 - **Follow**
     - Users have the ability to follow other users so that their feed can contain the posts from said users for them to view.
-    [Follow](src/assets/readme/features/follow.png)
+
+        ![Follow](src/assets/readme/features/follow.png)
 
 - **Profile Page**
     - The profile page allows a user to view their own or another user's profile. Users can edit their own profile by adding an image and a bio. The page also displays the number posts and rating that a user has, and shows a feed of their posts below their bio.
-    ![Profile page](src/assets/readme/features/profile.png)
+
+        ![Profile page](src/assets/readme/features/profile.png)
 
 ## Future Features
 
@@ -103,22 +111,19 @@ Some features that would benefit the site and its usability would be:
 
 ## Testing
 
-Please see my [testing file](Testing.md) for all manual and validator testing.
-
-## Validator Testing
-
-## Lighthouse Testing
+Please see my [testing file](Testing.md) for all manual, automated and validator testing.
 
 ## Bug Fixing:
 
 - When running tests for the Post list, i discovered an error "ERROR: test_can_list_posts (posts.tests.PostListViewTests.test_can_list_posts)". Reading through the error message allowed me to rectify the issue and traceback to the Post.views file where the error persists because the request context was not being passed to the serializer in the PostListView.
 - When going back through my work, i was testing the links for 'profiles', and 'posts' before moving forward into 'comments'. I discovered that the '/posts' address was throwing out and operational error for the post.image_filter that had been added. Saving the file and reloading the page, the error persisted. I then realised that it was added after the initial migration of the posts app and so i did 'python manage.py makemigrations' and then 'python manage.py migrate' and reloaded the website and saw that it had fixed the issue.
 - I had a major issue where i was receiving constant 500 internal error codes. Having spent hours changing backend configuration, testing autherization, serializers and allowed hosts, it appeared to have been a fault with the cloudinary URL link.
-- There was an issue where users were losing their access due to token refreshing. I went into the JWT settings and changed some of the values and set a timer.
+- There was an issue where users were losing their access due to token refreshing. I went into the JWT settings and changed some of the values and set a refresh timer.
+- For a while, i was struggling with a console error referencing a POST function of the site, i could work out why a user couldnt add an image to the image field of a post. I was directed to this page on [Stack Overflow](https://stackoverflow.com/questions/44997315/django-rest-framework-got-a-typeerror-when-calling-note-objects-create) by a Tutor, and it helped me randomly, just by simply making me go through the serializer for the posts model.
 
 ## Unfixed Bugs
 
-- No current console issues.
+- No current console issues or known bugs.
 
 
 ### Local Deployment
@@ -130,11 +135,11 @@ To preview the project in the development environment, run the following command
 
 To make a local copy of this repository, you can clone the project by typing the follow into your IDE terminal:
 
-- `git clone https://github.com/AJMCoder/Kinnect.git`
+- `git clone https://github.com/AJMCoder/kinnect_social.git`
 
 Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://ajmcoder-kinnect-i5d87yz316m.ws.codeinstitute-ide.net)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://ajmcoder-kinnectsocial-aejjwqnlad1.ws.codeinstitute-ide.net)
 
 ### Heroku Deployment
 
@@ -169,14 +174,13 @@ Before your final deployment, complete the following steps:
 
 ### Content
 
-- Code throughout the project was adapted from the Code Institute Moments walkthrough project as well as [Lama Dev](https://www.youtube.com/@LamaDev) front end socail media application walkthrough.
-- This [video](https://www.youtube.com/watch?v=rw3eZ6XodN8&t=21s) was used to understand how a star rating system can be applied to a profile.
-- [ChatGPT](https://chatgpt.com/) was used to create some of the filler text about the site, such as the text on the sign up and login pages.
+- [ChatGPT](https://chatgpt.com/) was used to create some of the filler text about the site.
 - The [video](https://www.youtube.com/watch?v=i1FeOOhNnwU&list=WL&index=10&t=455s) was used to help with the CSS layout of the website and help refresh my understanding of it.
-- Deployment steps are adapted from Code Institute's Momments walkthrough.
+- Deployment steps are adapted from Code Institute's Moments walkthrough.
 
 ### Media
 
 - I used [pexels](https://www.pexels.com/) for all of my images.
 - I used [font awesome](https://fontawesome.com/) for the majority of my icons used
 - I used [Google fonts](https://fonts.google.com/) for some of the icons required in the project.
+- I used [Cloudinary](https://cloudinary.com/) to store and host my images.

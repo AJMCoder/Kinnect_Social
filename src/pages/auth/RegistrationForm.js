@@ -6,6 +6,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import imageSrc from '../..//assets/registration-photo.jpeg';
 
 import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 
@@ -93,9 +94,7 @@ const Registration = () => {
       >
         <Image
           className={`${appStyles.FillerImage}`}
-          src={
-            "https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"
-          }
+          src={imageSrc}
         />
       </Col>
     </Row>

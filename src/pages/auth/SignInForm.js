@@ -16,6 +16,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import imageSrc from '../..//assets/login-photo.webp';
 import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
@@ -115,7 +116,7 @@ function SignInForm() {
       >
         <Image
           className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"}
+          src={imageSrc}
         />
       </Col>
     </Row>
