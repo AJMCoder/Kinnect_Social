@@ -16,6 +16,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
     const setCurrentUser = useSetCurrentUser();
@@ -36,6 +37,7 @@ function SignInForm() {
     try {
       const{data} = await axios.post("https://kinnect-api-cf0f665319fa.herokuapp.com/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user)
+      setTokenTimestamp(data);
       history.goBack();
     } catch (err) {
       setErrors(err.response?.data);

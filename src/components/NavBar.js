@@ -7,6 +7,7 @@ import axios from "axios";
 import styles from "../styles/NavBar.module.css";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { axiosRes } from "../api/axiosDefault";  // Axios for API requests
+import { removeTokenTimestamp } from "../utils/utils";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -41,6 +42,7 @@ const NavBar = () => {
     try {
       await axios.post("https://kinnect-api-cf0f665319fa.herokuapp.com/dj-rest-auth/logout/");
       setCurrentUser(null);
+      removeTokenTimestamp();
     } catch (err) {
       console.log(err);
     }
