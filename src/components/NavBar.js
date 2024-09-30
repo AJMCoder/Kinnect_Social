@@ -21,14 +21,12 @@ const NavBar = () => {
     if (currentUser) {
       axiosRes.get("/notifications/")
       .then((response) => {
-        console.log(response.data);  // Log to verify the response
-        const notifications = response.data.results;  // Access 'results' for the notifications array
+        const notifications = response.data.results;
         setNotifications(notifications);
 
-        // Safeguard to check if 'results' is an array
         if (Array.isArray(notifications)) {
           const unread = notifications.filter(notification => !notification.is_read).length;
-          setUnreadCount(unread);  // Set unread notifications count
+          setUnreadCount(unread);
         } else {
           console.error("Unexpected response format:", response.data);
         }
@@ -36,8 +34,8 @@ const NavBar = () => {
       .catch((err) => {
         console.error("Error fetching notifications:", err);
       });
-  }
-}, [currentUser]);
+    }
+  }, [currentUser]);
 
   const handleSignOut = async () => {
     try {
@@ -67,7 +65,7 @@ const NavBar = () => {
     </NavLink>
   );
 
-  const loggedInIcons = (
+  const loggedInIconsLeft = (
     <>
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/feed">
         <i className="fas fa-stream"></i>Feed
@@ -75,7 +73,11 @@ const NavBar = () => {
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/liked">
         <i className="fas fa-heart"></i>Liked
       </NavLink>
+    </>
+  );
 
+  const loggedInIconsRight = (
+    <>
       {/* Notifications Dropdown */}
       <Dropdown alignRight>
         <Dropdown.Toggle className={`${styles.NavLink} ${styles.NotificationIcon}`} variant="light" id="dropdown-basic">
@@ -119,7 +121,7 @@ const NavBar = () => {
   return (
     <Container>
       <Navbar expanded={expanded} className={styles.NavBar} bg="dark" expand="md" fixed="top" variant="dark">
-        <Navbar.Brand as={NavLink} to="/">Navbar</Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/">Kinnect</Navbar.Brand>
         {currentUser && addPostIcon}
         <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -127,7 +129,12 @@ const NavBar = () => {
             <NavLink exact className={styles.NavLink} activeClassName={styles.Active} to="/">
               <i className="fas fa-home"></i>Home
             </NavLink>
-            {currentUser ? loggedInIcons : loggedOutIcons}
+            {currentUser ? loggedInIconsLeft : loggedOutIcons}
+          </Nav>
+
+          {/* Right-aligned icons */}
+          <Nav className="ml-auto">
+            {currentUser ? loggedInIconsRight : null}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
